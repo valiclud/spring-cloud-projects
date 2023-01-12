@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Taco Cloud</title>
+<link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+	<h1>All Orders Overview</h1>
+	<table class="table-bordered">
+		<thead  class="header">
+			<tr>
+				<td>Name</td>
+				<td>Street</td>
+				<td>City</td>
+				<td>State</td>
+				<td>Zip Code</td>
+				<td>CC Number</td>
+				<td>CC Expiration</td>
+				<td>Ordered Taco's</td>
+			</tr>
+		</thead>
+		<tbody>
+		<!--  	<tr th:if="${orderPage.empty}">
+				<td colspan="8">No orders</td>
+			</tr>
+			-->
+			<tr th:each="tacoOrder: ${orderPage}">
+				<td th:text="${tacoOrder.deliveryName}">Delivery name</td>
+				<td th:text="${tacoOrder.deliveryStreet}">Delivery street</td>
+				<td th:text="${tacoOrder.deliveryCity}">Delivery city</td>
+				<td th:text="${tacoOrder.deliveryState}">Delivery state</td>
+				<td th:text="${tacoOrder.deliveryZip}">Delivery zip code</td>
+				<td th:text="${tacoOrder.ccNumber}">CC number</td>
+				<td th:text="${tacoOrder.ccExpiration}">CC expiration</td>
+				<td>
+					<table>
+						<tbody>
+							<tr th:each="taco: ${tacoOrder.tacos}">
+								<td th:text="${taco.name}">Taco's name</td>
+								<td>
+									<table>
+										<tbody>
+											<tr th:each="ingredient: ${taco.ingredients}">
+												<td th:text="${ingredient.name}">Ingredient's name</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+	</table>
+
+	<div th:if="${orderPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/allOrdersForm(size=${orderPage.size}, page=${pageNumber})}"
+        th:text=${pageNumber}
+        th:class="${pageNumber==orderPage.number + 1} ? active"></a>
+</div>
+	<br />
+	<a th:href="@{/}" id="another">Return to home page</a>
+</body>
+</html>
