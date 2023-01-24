@@ -47,7 +47,6 @@ public class AllOrdersController {
 	@GetMapping
 	public String allOrdersForm(Model model, @RequestParam("page") Optional<Integer> page, 
       @RequestParam("size") Optional<Integer> size) {
-		
 		Iterable <TacoOrder> tacoOrders = orderRepo.findAll();
 		List<TacoOrder> ordersList = Streamable.of(tacoOrders).toList();
 		this.addPaginationAttributes(model, page, size, ordersList);
