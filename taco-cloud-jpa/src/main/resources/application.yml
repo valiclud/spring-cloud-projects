@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    generate-unique-name: false
+    name: tacocloud
+  thymeleaf:
+    cache:  false
+  data:
+    rest:
+      base-path: /data-api
+taco:
+ orders:
+  pageSize: 3
+  

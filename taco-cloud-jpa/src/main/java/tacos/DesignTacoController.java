@@ -16,40 +16,43 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import tacos.Ingredient.Type;
 import tacos.data.IngredientRepository;
+import tacos.data.IngredientService;
+import tacos.dto.IngredientDto;
+import tacos.dto.TacoDto;
+import tacos.dto.TacoOrderDto;
+import tacos.entity.Ingredient.Type;
 
 @Slf4j
 @Controller
 @RequestMapping("/design")
-@SessionAttributes("tacoOrder")
+@SessionAttributes("tacoOrderDto")
 public class DesignTacoController {
 
-	private final IngredientRepository ingredientRepo;
+	private final IngredientService ingredientService;
 
 	@Autowired
-	public DesignTacoController(IngredientRepository ingredientRepo) {
-		this.ingredientRepo = ingredientRepo;
+	public DesignTacoController(IngredientService ingredientService) {
+		this.ingredientService = ingredientService;
 	}
 
 	@ModelAttribute
 	public void addIngredientsToModel(Model model) {
-		Iterable<Ingredient> ingredients = ingredientRepo.findAll();
-		List<Ingredient> ingredsList = Streamable.of(ingredients).toList();
-		Type[] types = Ingredient.Type.values();
-		for (Type type : types) {
+		List<IngredientDto> ingredsList = ingredientService.findAll();
+		IngredientDto.Type[] types = IngredientDto.Type.values();
+		for (IngredientDto.Type type : types) {
 			model.addAttribute(type.toString().toLowerCase(), filterByType(ingredsList, type));
 		}
 	}
 
-	@ModelAttribute(name = "tacoOrder")
-	public TacoOrder order() {
-		return new TacoOrder();
+	@ModelAttribute(name = "tacoOrderDto")
+	public TacoOrderDto order() {
+		return new TacoOrderDto();
 	}
 
-	@ModelAttribute(name = "taco")
-	public Taco taco() {
-		return new Taco();
+	@ModelAttribute(name = "tacoDto")
+	public TacoDto taco() {
+		return new TacoDto();
 	}
 
 	@GetMapping
@@ -58,8 +61,8 @@ public class DesignTacoController {
 	}
 
 	@PostMapping
-	public String processTaco(@Valid Taco taco, Errors errors, 
-			@ModelAttribute TacoOrder tacoOrder) {
+	public String processTaco(@Valid TacoDto taco, Errors errors, 
+			@ModelAttribute TacoOrderDto tacoOrder) {
 
 		if (errors.hasErrors()) {
 			return "design";
@@ -71,7 +74,7 @@ public class DesignTacoController {
 		return "redirect:/orders/current";
 	}
 
-	private Iterable<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
+	private Iterable<IngredientDto> filterByType(List<IngredientDto> ingredients, IngredientDto.Type type) {
 		return ingredients.stream().filter(x -> x.getType().equals(type))
 				.collect(Collectors.toList());
 	}

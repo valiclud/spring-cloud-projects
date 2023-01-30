@@ -3,8 +3,8 @@ package tacos.data;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
- 
-import tacos.Ingredient;
+
+import tacos.entity.Ingredient;
  
 public interface IngredientRepository 
          extends CrudRepository<Ingredient, Long> {

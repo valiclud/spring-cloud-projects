@@ -23,6 +23,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import lombok.extern.slf4j.Slf4j;
 import tacos.data.OrderRepository;
+import tacos.data.OrderService;
+import tacos.dto.TacoOrderDto;
+import tacos.entity.TacoOrder;
+import tacos.web.OrderProperties;
 
 @Slf4j
 @Controller
@@ -30,12 +34,14 @@ import tacos.data.OrderRepository;
 @SessionAttributes("tacoOrders")
 public class AllOrdersController {
 
-	
-	private OrderRepository orderRepo;
+	private OrderService orderService;
+	private OrderProperties orderProperties;
 	 
 	@Autowired
-	public AllOrdersController(OrderRepository orderRepo) {
-		this.orderRepo = orderRepo;
+	public AllOrdersController(OrderService orderService,
+			OrderProperties orderProperties) {
+		this.orderService = orderService;
+		this.orderProperties = orderProperties;
 	}
 	
 	@ModelAttribute(name="allOrders")
@@ -47,18 +53,17 @@ public class AllOrdersController {
 	@GetMapping
 	public String allOrdersForm(Model model, @RequestParam("page") Optional<Integer> page, 
       @RequestParam("size") Optional<Integer> size) {
-		Iterable <TacoOrder> tacoOrders = orderRepo.findAll();
-		List<TacoOrder> ordersList = Streamable.of(tacoOrders).toList();
-		this.addPaginationAttributes(model, page, size, ordersList);
+		List <TacoOrderDto> tacoOrders = orderService.findAll();
+		this.addPaginationAttributes(model, page, size, tacoOrders);
 		
 		return "allOrdersForm";
 	}
 	
 	private void addPaginationAttributes(Model model, Optional<Integer> page,
-			Optional<Integer> size, List<TacoOrder> ordersList) {
+			Optional<Integer> size, List<TacoOrderDto> ordersList) {
 		int currentPage = page.orElse(1);
-        int pageSize = size.orElse(2);
-		Page<TacoOrder> orderPage = this.findOrderPage(PageRequest.of(currentPage - 1, pageSize), ordersList);
+        int pageSize = size.orElse(this.orderProperties.getPageSize());
+		Page<TacoOrderDto> orderPage = this.findOrderPage(PageRequest.of(currentPage - 1, pageSize), ordersList);
 		
 		model.addAttribute("orderPage", orderPage);
 
@@ -71,11 +76,11 @@ public class AllOrdersController {
         }
 	}
 	
-	private Page<TacoOrder> findOrderPage(Pageable pageable, List<TacoOrder> orders) {
+	private Page<TacoOrderDto> findOrderPage(Pageable pageable, List<TacoOrderDto> orders) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
-        List<TacoOrder> list;
+        List<TacoOrderDto> list;
 
         if (orders.size() < startItem) {
             list = Collections.emptyList();
@@ -84,8 +89,8 @@ public class AllOrdersController {
             list = orders.subList(startItem, toIndex);
         }
 
-        Page<TacoOrder> orderPage
-          = new PageImpl<TacoOrder>(list, PageRequest.of(currentPage, pageSize), orders.size());
+        Page<TacoOrderDto> orderPage
+          = new PageImpl<TacoOrderDto>(list, PageRequest.of(currentPage, pageSize), orders.size());
 
         return orderPage;
     }

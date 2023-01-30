@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import tacos.Ingredient;
-import tacos.Ingredient.Type;
+import tacos.entity.Ingredient;
+import tacos.entity.Ingredient.Type;
 
 @Component
 public class MyCommandLineRunner implements CommandLineRunner {

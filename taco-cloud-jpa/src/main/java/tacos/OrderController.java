@@ -13,18 +13,20 @@ import org.springframework.web.bind.support.SessionStatus;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import tacos.data.OrderRepository;
+import tacos.data.OrderService;
+import tacos.dto.TacoOrderDto;
 
 @Slf4j
 @Controller
 @RequestMapping("/orders")
-@SessionAttributes("tacoOrder")
+@SessionAttributes("tacoOrderDto")
 public class OrderController {
 
-	private OrderRepository orderRepo;
-	
 	@Autowired
-	public OrderController(OrderRepository orderRepo) {
-		this.orderRepo = orderRepo;
+	private OrderService orderService;
+	
+	public OrderController(OrderService orderService) {
+		this.orderService = orderService;
 	}
 	
 	@GetMapping("/current")
@@ -33,14 +35,14 @@ public class OrderController {
 	}
 	
 	@PostMapping
-	public String processOrder(@Valid TacoOrder order, Errors errors, SessionStatus sessionStatus) {
+	public String processOrder(@Valid TacoOrderDto order, Errors errors, SessionStatus sessionStatus) {
 		if (errors.hasErrors()) {
 		    return "orderForm";
 		  }
 
 		log.info("Order submitted:{}", order);
 		sessionStatus.setComplete();
-		orderRepo.save(order);
+		orderService.save(order);
 		
 		return "redirect:/";
 	}
