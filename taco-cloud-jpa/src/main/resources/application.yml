@@ -7,7 +7,22 @@ spring:
   data:
     rest:
       base-path: /data-api
+  jms:
+    template:
+      default-destination: tacocloud.order.queue
+  artemis:
+    user: valicek
+    password: lukasa
+  kafka:
+    bootstrap-servers:
+    - localhost:9092
+    template:
+      default-topic: tacocloud.orders.topic
+    consumer:
+      group-id: "myGroup"
+logging:
+  file:
+    name: ./src/main/resources/var/logs/tacoCloud.log
 taco:
- orders:
-  pageSize: 3
-  
+  orders:
+    pageSize: 3

@@ -1,21 +1,24 @@
 package tacos.dto;
 
-import java.beans.JavaBean;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import jakarta.annotation.ManagedBean;
-import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import tacos.entity.Ingredient;
+import org.apache.kafka.common.serialization.StringSerializer;
 
 @Data
-public class TacoDto {
+public class TacoDto implements Serializable{
 
-	  @NotNull
+	  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@NotNull
 	  @Size(min=5, message="Name must be at least 5 characters long")
 	  private String name;
 	 

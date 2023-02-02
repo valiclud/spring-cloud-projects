@@ -18,6 +18,7 @@ import tacos.data.OrderRepository;
 import tacos.data.OrderService;
 import tacos.dto.TacoOrderDto;
 import tacos.entity.TacoOrder;
+import tacos.messaging.OrderMessagingService;
 
 @Slf4j
 @RestController
@@ -26,9 +27,12 @@ import tacos.entity.TacoOrder;
 public class TacoOrderController {
 
 	private OrderService orderService;
+	private OrderMessagingService messageService;
 
-	public TacoOrderController(OrderService orderService) {
+	public TacoOrderController(OrderService orderService,
+			OrderMessagingService messageService) {
 		this.orderService = orderService;
+		this.messageService = messageService;
 	}
 
 	@GetMapping(params = "recent")
@@ -36,7 +40,7 @@ public class TacoOrderController {
 		List<TacoOrderDto> tacoOrders = orderService.findAll();
 		return tacoOrders;
 	}
-	
+/*	
 	@PostMapping(consumes="application/json")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<TacoOrderDto> postTaco(@RequestBody TacoOrderDto tacoOrder) {
@@ -49,5 +53,14 @@ public class TacoOrderController {
 
 		return new ResponseEntity<TacoOrderDto>(HttpStatus.OK);
 	}
-	
+*/	
+	@PostMapping(consumes="application/json")
+	  @ResponseStatus(HttpStatus.CREATED)
+	  public TacoOrderDto postOrder(@RequestBody TacoOrderDto order) {
+	    log.info("1----1 " + order);
+		messageService.sendOrder(order);
+	    Optional<TacoOrderDto> savedTaco = orderService.save(order);
+	    return savedTaco.get();
+	  }
+
 }

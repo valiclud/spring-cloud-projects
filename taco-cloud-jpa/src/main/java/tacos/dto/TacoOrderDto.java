@@ -1,23 +1,26 @@
 package tacos.dto;
 
-import java.beans.JavaBean;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import jakarta.annotation.ManagedBean;
-import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import tacos.data.OrderService;
+import org.apache.kafka.common.serialization.StringSerializer;
 
 @Slf4j
 @Data
-public class TacoOrderDto {
+public class TacoOrderDto implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Date placedAt;
 	
 	@NotBlank(message="Delivery name is required")
@@ -42,7 +45,6 @@ public class TacoOrderDto {
 	private List<TacoDto> tacos = new ArrayList<>();
 	
 	public void addTaco(TacoDto taco) {
-		log.info("-------111 " + taco);
 		this.tacos.add(taco);
 	}
 	
