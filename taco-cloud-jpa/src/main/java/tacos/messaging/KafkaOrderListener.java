@@ -17,12 +17,12 @@ public class KafkaOrderListener {
 	  public OrderListener(KitchenUI ui) {
 	    this.ui = ui;
 	  }
-	 */
 	  @KafkaListener(topics="tacocloud.orders.topic")
 	  public void handle(String orderDto) {
 		  log.info("---RECEIVED ORDER VIA KAFKA MSG:{}" + orderDto);
 	   // ui.displayOrder(order);
 	  }
+	 */
 	 
 	}
 

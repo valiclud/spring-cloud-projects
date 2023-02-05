@@ -20,9 +20,26 @@ spring:
       default-topic: tacocloud.orders.topic
     consumer:
       group-id: "myGroup"
+  jmx:
+    enabled: true
 logging:
   file:
     name: ./src/main/resources/var/logs/tacoCloud.log
 taco:
   orders:
     pageSize: 3
+info:
+  contact:
+    email: ludvik@tacocloud.com
+    phone: 00420-604-202686
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+    jmx:
+      exposure:
+        include: health,info,bean,conditions,env,metrics
+  endpoint: 
+     health:
+       show-details: always
