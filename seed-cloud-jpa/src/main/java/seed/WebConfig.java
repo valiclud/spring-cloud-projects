@@ -12,7 +12,6 @@ public class WebConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		log.info("-------- I AM HERE");
 		registry.addViewController("/").setViewName("seedstartermng");
 	}
 	
