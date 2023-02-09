@@ -28,7 +28,6 @@ import tacos.dto.TacoOrderDto;
 import tacos.entity.TacoOrder;
 import tacos.web.OrderProperties;
 
-@Slf4j
 @Controller
 @RequestMapping("/allOrdersForm")
 @SessionAttributes("tacoOrders")
@@ -49,7 +48,6 @@ public class AllOrdersController {
 		return new ArrayList<>();
 	}
 
-	//@ModelAttribute
 	@GetMapping
 	public String allOrdersForm(Model model, @RequestParam("page") Optional<Integer> page, 
       @RequestParam("size") Optional<Integer> size) {
