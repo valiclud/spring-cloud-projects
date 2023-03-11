@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    generate-unique-name: false
+    name: rocket-cloud
+  thymeleaf:
+    cache: false

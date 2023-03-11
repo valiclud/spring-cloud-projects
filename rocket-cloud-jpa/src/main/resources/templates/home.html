@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Rocket Calculation Cloud</title>
+</head>
+
+<body>
+	<h1>Welcome to rocket site...</h1>
+	
+	      <form th:href="@{/home}"  th:object="${flightDto}" method="post">
+    
+        <fieldset>
+        <div>
+		<label for="rocketSort" th:text="#{rocket.sort}">RocketSort</label> 
+		<br/>
+ 	 <select th:field="*{rocketDto.sort}"> 
+			<option th:each="r : ${sortRockets}" th:value="${r.sort}"
+				th:text="#{${'rocket.' + r.sort}}">SortRocketFrame</option>
+		</select> 
+	</div>  
+	<br/>
+			<div>
+				<label for="rocketName" th:text="#{rocket.name}">RocketName</label> 
+				<br/>
+				<select	th:field="*{rocketDto.name}">
+					<option th:each="r : ${allRockets}" th:value="${r.name}"
+						th:text="#{${'rocket.name.' + r.name}}">NameRocketFrame</option>
+				</select>
+			</div>
+			<br/>
+	<div>
+		<label for="windDirection" th:text="#{windDirection}">WindDirection</label> 
+		<br/>
+	  	 <select	th:field="*{windDirectionDto.windDirectionName}"> 
+			<option th:each="wd : ${allWindDirections}" th:value="${wd.windDirectionName}"
+				th:text="#{${'windDirection.' + wd.windDirectionName}}">WindDirectionFrame</option>
+		</select>
+	</div>  
+	<br/>
+	<div>
+		<label for="windSpeed" th:text="#{flight.windSpeed}">WindSpeed</label> 
+		<br/>
+	  	 <input type="text" th:field="*{windSpeed}" />
+	  	 <span class="validationError"
+            th:if="${#fields.hasErrors('windSpeed')}"
+            th:errors="*{windSpeed}">Wind Speed Error</span>
+	  	 
+	</div>  
+	<br/>
+	<div>
+		<label for="height" th:text="#{rocket.initHeight}">InitHeight</label> 
+		<br/>
+	  	 <input type="text" th:field="*{height}" />
+	  	 <span class="validationError"
+            th:if="${#fields.hasErrors('height')}"
+            th:errors="*{height}">Wind Speed Error</span>
+	</div>  
+	<br/>
+	<div>
+		<label for="angle" th:text="#{flight.angle}">FlightInitAngle</label> 
+		<br/>
+	  	 <input type="text" th:field="*{angle}" />
+	  	 <span class="validationError"
+            th:if="${#fields.hasErrors('angle')}"
+            th:errors="*{angle}">Wind Speed Error</span>
+	</div>  
+	<br/>
+	<div>
+		<label for="distance" th:text="#{flight.distance}">FlightInitAngle</label> 
+		<br/>
+	  	 <input type="text" th:field="*{distance}" />
+	</div>  
+	<br/>
+	<div>
+		<label for="speed" th:text="#{flight.speed}">FlightSpeed</label> 
+		<br/>
+	  	 <input type="text" th:field="*{speed}" />
+	</div>  
+	<br/>
+	         <div class="submit">
+            <button type="submit" name="save" th:text="#{rocket.calculate}">Calculate rocket</button>    
+          </div>
+        
+        </fieldset>
+          
+      </form>
+	
+</body>
+</html>
+
