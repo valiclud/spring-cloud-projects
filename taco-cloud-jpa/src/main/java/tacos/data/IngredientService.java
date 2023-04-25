@@ -6,11 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lombok.extern.slf4j.Slf4j;
 import tacos.dto.IngredientDto;
 import tacos.entity.Ingredient;
 
-@Slf4j
 @Service
 public class IngredientService {
 
@@ -20,16 +18,16 @@ public class IngredientService {
 	public List<IngredientDto> findAll(){
 		Iterable<Ingredient> ingreds = this.ingredientRepository.findAll();
 		
-		return convertIterableToDto(ingreds);
+		return ingredientsToDto(ingreds);
 	}
 	
 	public List<IngredientDto> findByCode(String code)  {
 		Iterable<Ingredient> ingreds = this.ingredientRepository.findByCode(code);
 		
-		return convertIterableToDto(ingreds);
+		return ingredientsToDto(ingreds);
 	}
 	
-	private List<IngredientDto> convertIterableToDto(Iterable<Ingredient> ingreds){
+	private List<IngredientDto> ingredientsToDto(Iterable<Ingredient> ingreds){
 		List<IngredientDto> listIngreds = new ArrayList<>();
 		if (ingreds.iterator().hasNext()) {
 			for (Ingredient ingredient : ingreds) {

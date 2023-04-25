@@ -1,7 +1,6 @@
 package tacos.dto;
 
 import java.io.Serializable;
-import org.apache.kafka.common.serialization.StringSerializer;
 
 import lombok.Data;
 

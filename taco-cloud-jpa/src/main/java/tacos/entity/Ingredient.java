@@ -14,7 +14,6 @@ import lombok.AccessLevel;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor(access=AccessLevel.PRIVATE, force=true)
-//@NoArgsConstructor
 public class Ingredient {
 
 	

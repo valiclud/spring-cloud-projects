@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -16,12 +15,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import tacos.data.IngredientRepository;
 import tacos.data.IngredientService;
 import tacos.dto.IngredientDto;
 import tacos.dto.TacoDto;
 import tacos.dto.TacoOrderDto;
-import tacos.entity.Ingredient.Type;
 
 @Slf4j
 @Controller

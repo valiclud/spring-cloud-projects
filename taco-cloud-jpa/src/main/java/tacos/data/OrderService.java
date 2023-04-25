@@ -7,15 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lombok.extern.slf4j.Slf4j;
-import tacos.dto.IngredientDto;
-import tacos.dto.TacoDto;
 import tacos.dto.TacoOrderDto;
-import tacos.entity.Ingredient;
-import tacos.entity.Taco;
 import tacos.entity.TacoOrder;
 
-@Slf4j
 @Service
 public class OrderService {
 

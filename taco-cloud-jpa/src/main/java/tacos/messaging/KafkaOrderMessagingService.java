@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import tacos.dto.TacoOrderDto;
 
+//@Primary
 @Service
 public class KafkaOrderMessagingService implements OrderMessagingService {
 	  

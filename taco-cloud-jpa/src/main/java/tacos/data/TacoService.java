@@ -7,9 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tacos.dto.IngredientDto;
 import tacos.dto.TacoDto;
-import tacos.entity.Ingredient;
 import tacos.entity.Taco;
 
 @Service

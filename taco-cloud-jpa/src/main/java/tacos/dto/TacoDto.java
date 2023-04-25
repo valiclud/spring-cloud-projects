@@ -8,7 +8,6 @@ import java.util.List;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import org.apache.kafka.common.serialization.StringSerializer;
 
 @Data
 public class TacoDto implements Serializable{
