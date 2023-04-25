@@ -54,7 +54,6 @@ public class TacoOrderController {
 	@PostMapping(consumes="application/json")
 	  @ResponseStatus(HttpStatus.CREATED)
 	  public TacoOrderDto postOrder(@RequestBody TacoOrderDto order) {
-	    log.info("1----1 " + order);
 		messageService.sendOrder(order);
 	    Optional<TacoOrderDto> savedTaco = orderService.save(order);
 	    return savedTaco.get();
