@@ -14,16 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.Slf4j;
 import seed.feature.Feature;
 import seed.feature.FeatureService;
 import seed.row.SeedRow;
 import seed.row.Variety;
 import seed.row.VarietyService;
 
-@Slf4j
 @Controller
-//@SessionAttributes("seedStarter")
+@SessionAttributes("seedStarter")
 public class SeedStarterController {
 
 	@Autowired
