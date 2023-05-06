@@ -4,9 +4,9 @@ package tacos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -28,20 +28,21 @@ public class OrderController {
 		this.orderService = orderService;
 	}
 	
-	@GetMapping("/current")
+  @RequestMapping(value={"", "/", "/current"}, method = RequestMethod.GET)
 	public String orderForm() {
 		return "orderForm";
 	}
 	
-	@PostMapping
-	public String processOrder(@Valid TacoOrderDto order, Errors errors, SessionStatus sessionStatus) {
+	@PostMapping()
+	public String processOrder(@Valid TacoOrderDto tacoOrderDto, Errors errors,
+	    SessionStatus sessionStatus) {
 		if (errors.hasErrors()) {
 		    return "orderForm";
 		  }
 
-		log.info("Order submitted:{}", order);
+		log.info("Order submitted:{}", tacoOrderDto);
 		sessionStatus.setComplete();
-		orderService.save(order);
+		orderService.save(tacoOrderDto);
 		
 		return "redirect:/";
 	}

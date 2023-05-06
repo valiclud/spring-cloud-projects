@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Taco Cloud</title>
+<link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+	<h1>All Taco's Design Overview</h1>
+	<table class="table-bordered">
+		<thead class="header">
+			<tr>
+				<td>Taco's Name</td>
+				<td>Created At</td>
+				<td>Taco's Ingredient</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="tacoDesign: ${designPage}">
+				<td th:text="${tacoDesign.name}">Tacos name</td>
+				<td th:text="${tacoDesign.createdAt}">Created At</td>
+				<td>
+					<table>
+						<tbody>
+							<tr th:each="ingredient: ${tacoDesign.ingredients}">
+								<td th:text="${ingredient.name}">Ingredient's name</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+	</table>
+
+	<div th:if="${designPage.totalPages > 0}"
+		th:each="pageNumber : ${pageNumbers}">
+		<a
+			th:href="@{/allDesignsForm(size=${designPage.size}, page=${pageNumber})}"
+			th:text=${pageNumber}
+			th:class="${pageNumber==designPage.number + 1} ? active"></a>
+	</div>
+	<br />
+	<a th:href="@{/}" id="another">Return to home page</a>
+</body>
+</html>
