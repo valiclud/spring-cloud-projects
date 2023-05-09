@@ -27,15 +27,15 @@ public class OrderController {
 	public OrderController(OrderService orderService) {
 		this.orderService = orderService;
 	}
-	
-  @RequestMapping(value={"", "/", "/current"}, method = RequestMethod.GET)
+
+	@RequestMapping(value={"", "/", "/current"}, method = RequestMethod.GET)
 	public String orderForm() {
 		return "orderForm";
 	}
 	
 	@PostMapping()
-	public String processOrder(@Valid TacoOrderDto tacoOrderDto, Errors errors,
-	    SessionStatus sessionStatus) {
+	public String processOrder(@Valid TacoOrderDto tacoOrderDto, 
+	    Errors errors, SessionStatus sessionStatus) {
 		if (errors.hasErrors()) {
 		    return "orderForm";
 		  }

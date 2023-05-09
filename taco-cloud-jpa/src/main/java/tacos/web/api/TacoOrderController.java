@@ -37,6 +37,12 @@ public class TacoOrderController {
 		List<TacoOrderDto> tacoOrders = orderService.findAll();
 		return tacoOrders;
 	}
+	
+	@GetMapping(params = "clients")
+  public List<TacoOrderDto> clientsTacoOrders() {
+    List<TacoOrderDto> tacoOrders = orderService.findAll();
+    return tacoOrders;
+  }
 /*	
 	@PostMapping(consumes="application/json")
 	@ResponseStatus(HttpStatus.CREATED)

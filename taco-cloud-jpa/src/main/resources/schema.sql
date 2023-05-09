@@ -1,4 +1,4 @@
-create table if not exists Taco_Order (
+create table if not exists Client (
   id identity,
   delivery_Name varchar(50) not null,
   delivery_Street varchar(50) not null,
@@ -8,6 +8,12 @@ create table if not exists Taco_Order (
   cc_number varchar(16) not null,
   cc_expiration varchar(5) not null,
   cc_cvv varchar(3) not null,
+  created_at timestamp not null
+);
+
+create table if not exists Taco_Order (
+  id identity,
+  client_id bigint not null,
   placed_at timestamp not null
 );
 
@@ -42,6 +48,9 @@ create table if not exists Applicationuser (
   phonenumber varchar(25) not null
 );
 
+alter table Taco_Order
+    add foreign key (client_id) references Client(id);
+    
 alter table Taco
     add foreign key (taco_order_id) references Taco_Order(id);
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tacos.dto.TacoOrderDto;
+import tacos.entity.Client;
 import tacos.entity.TacoOrder;
 
 @Service
@@ -15,6 +16,8 @@ public class OrderService {
 
 	@Autowired
 	OrderRepository orderRepository;
+	@Autowired
+	ClientRepository clientRepository;
 	
 	public List<TacoOrderDto> findAll(){
 		Iterable<TacoOrder> tacos = this.orderRepository.findAll();
@@ -31,6 +34,7 @@ public class OrderService {
 	public Optional<TacoOrderDto> save(TacoOrderDto tacoOrderDto) {
 		if (Optional.of(tacoOrderDto).isPresent()) {
 			TacoOrder tacoOrder = Helper.toTacoOrder(tacoOrderDto);
+			setExistingClient(tacoOrder);
 			TacoOrder tacoOrderSaved = this.orderRepository.save(tacoOrder);
 			if (Optional.of(tacoOrderSaved).isPresent()) {
 				TacoOrderDto tacoOrderDtoSaved = Helper.toTacoOrderDto(tacoOrderSaved);
@@ -41,13 +45,29 @@ public class OrderService {
 	}
 	
 	public Optional<TacoOrderDto> find(Long id) {
-		Optional<TacoOrder> opt = this.orderRepository.findById(id);
-		if (opt.isPresent()) {
-			TacoOrderDto tacoOrderDto = Helper.toTacoOrderDto(opt.get());
-			return Optional.of(tacoOrderDto);
-		} else {
-			return Optional.empty();
-		}
+    Optional<TacoOrder> opt = this.orderRepository.findById(id);
+    if (opt.isPresent()) {
+      TacoOrderDto tacoOrderDto = Helper.toTacoOrderDto(opt.get());
+      return Optional.of(tacoOrderDto);
+    } else {
+      return Optional.empty();
+    }
+  }
+	
+	private void setExistingClient(TacoOrder tacoOrder) {
+	  List<Client> clients = this.clientRepository.findByDeliveryName(tacoOrder.getClient().getDeliveryName());
+    if(isClientAlreadyInDatabase(tacoOrder, clients)) {
+      tacoOrder.setClient(clients.get(0));
+    }
+	}
+	
+	private boolean isClientAlreadyInDatabase(TacoOrder tacoOrder, List<Client> clients) {
+	  if(!clients.isEmpty() 
+	      && tacoOrder.getClient().getDeliveryName().equals(clients.get(0).getDeliveryName())) {
+	    return true;
+	  } else {
+	    return false;
+	  }
 	}
 	
 }

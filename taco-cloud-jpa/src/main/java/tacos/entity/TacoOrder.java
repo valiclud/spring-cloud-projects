@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 
@@ -23,18 +24,13 @@ public class TacoOrder {
 	
 	private Date placedAt;
 	
-	private String deliveryName;
-	private String deliveryStreet;
-	private String deliveryCity;
-	private String deliveryState;
-	private String deliveryZip;
-	private String ccNumber;
-	private String ccExpiration;
-	private String ccCVV;
-	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="taco_order_id")
 	private List<Taco> tacos = new ArrayList<>();
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="client_id")
+  private Client client;
 	
 	public void addTaco(Taco taco) {
 		this.tacos.add(taco);
