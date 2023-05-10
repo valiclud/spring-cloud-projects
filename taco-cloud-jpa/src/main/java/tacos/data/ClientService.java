@@ -52,5 +52,13 @@ public class ClientService {
     return Optional.empty();
   }
   
+  public Optional<ClientDto> findById(Long id) {
+    if (!Optional.of(id).isEmpty()) {
+      Optional<Client> client = this.clientRepository.findById(id);
+      if (!client.isEmpty())
+        return Optional.of(Helper.toClientDto(client.get()));
+    }
+    return Optional.empty();
+  }
   
 }

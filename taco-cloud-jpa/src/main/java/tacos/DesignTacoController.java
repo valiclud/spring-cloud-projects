@@ -66,7 +66,6 @@ public class DesignTacoController {
 		}
 
 		tacoOrder.addTaco(taco);
-		log.info("----- " + tacoOrder);
 
 		return "redirect:/orders/current";
 	}
