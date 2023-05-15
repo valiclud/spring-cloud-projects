@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 import tacos.dto.ClientDto;
 import tacos.entity.Client;
-import tacos.web.api.TacoClientController;
 
 @Slf4j
 @Service
