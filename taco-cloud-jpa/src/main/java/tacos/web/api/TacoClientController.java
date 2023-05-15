@@ -86,15 +86,7 @@ public class TacoClientController {
       if (patch.getDeliveryZip() != null) {
         clientDto.get().setDeliveryZip(patch.getDeliveryZip());
       }
-      if (patch.getCcNumber() != null) {
-        clientDto.get().setCcNumber(patch.getCcNumber());
-      }
-      if (patch.getCcExpiration() != null) {
-        clientDto.get().setCcExpiration(patch.getCcExpiration());
-      }
-      if (patch.getCcCVV() != null) {
-        clientDto.get().setCcCVV(patch.getCcCVV());
-      }
+
       Optional<ClientDto> savedDto = this.clientService.save(clientDto.get());
       return new ResponseEntity<>(savedDto.get(), HttpStatus.OK);
     }

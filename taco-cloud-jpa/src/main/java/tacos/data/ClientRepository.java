@@ -11,4 +11,6 @@ public interface ClientRepository
 
   List<Client> findByDeliveryName(String deliveryName);
   
+  Client findByUsername(String username);
+  
 }

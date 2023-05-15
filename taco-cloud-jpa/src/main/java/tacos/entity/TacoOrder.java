@@ -22,6 +22,9 @@ public class TacoOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private String ccNumber;
+  private String ccExpiration;
+  private String ccCVV;
 	private Date placedAt;
 	
 	@OneToMany(cascade=CascadeType.ALL)

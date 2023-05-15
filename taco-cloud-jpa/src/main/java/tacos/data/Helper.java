@@ -66,6 +66,9 @@ public class Helper {
 	
 	public static TacoOrderDto toTacoOrderDto(TacoOrder tacoOrder) {
 		TacoOrderDto tacoOrderDto = new TacoOrderDto();
+		tacoOrderDto.setCcNumber(tacoOrder.getCcNumber());
+		tacoOrderDto.setCcCVV(tacoOrder.getCcCVV());
+		tacoOrderDto.setCcExpiration(tacoOrder.getCcExpiration());
 		tacoOrderDto.setPlacedAt(tacoOrder.getPlacedAt());
 		tacoOrderDto.setClientDto(toClientDto(tacoOrder.getClient()));
 		
@@ -81,13 +84,12 @@ public class Helper {
 	
 	public static TacoOrder toTacoOrder(TacoOrderDto tacoOrderDto) {
 		TacoOrder taco = new TacoOrder();
+		taco.setCcNumber(tacoOrderDto.getCcNumber());
+		taco.setCcCVV(tacoOrderDto.getCcCVV());
+		taco.setCcExpiration(tacoOrderDto.getCcExpiration());
 		taco.setPlacedAt(tacoOrderDto.getPlacedAt());
 		Client c = toClient(tacoOrderDto.getClientDto());
-		//c.setId(1L);
 		taco.setClient(c);
-		
-		//taco.setClient(toClient(tacoOrderDto.getClientDto()));
-		
 		List<TacoDto> dtos = tacoOrderDto.getTacos();
 		List<Taco> tacos = new ArrayList<>();
 		for(TacoDto dto : dtos) {
@@ -106,9 +108,6 @@ public class Helper {
 	  client.setDeliveryCity(clientDto.getDeliveryCity());
     client.setDeliveryState(clientDto.getDeliveryState());
     client.setDeliveryZip(clientDto.getDeliveryZip());
-    client.setCcNumber(clientDto.getCcNumber());
-    client.setCcExpiration(clientDto.getCcExpiration());
-    client.setCcCVV(clientDto.getCcCVV());
     client.setCreatedAt(clientDto.getCreatedAt());
 	  
 	  return client;
@@ -122,9 +121,6 @@ public class Helper {
 	    clientDto.setDeliveryCity(client.getDeliveryCity());
 	    clientDto.setDeliveryState(client.getDeliveryState());
 	    clientDto.setDeliveryZip(client.getDeliveryZip());
-	    clientDto.setCcNumber(client.getCcNumber());
-	    clientDto.setCcExpiration(client.getCcExpiration());
-	    clientDto.setCcCVV(client.getCcCVV());
 	    clientDto.setCreatedAt(client.getCreatedAt());
 	    
 	    return clientDto;
