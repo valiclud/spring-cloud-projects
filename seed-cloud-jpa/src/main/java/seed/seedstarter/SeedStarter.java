@@ -1,11 +1,8 @@
 package seed.seedstarter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
-import org.springframework.data.util.Streamable;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -15,14 +12,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 import seed.feature.Feature;
 import seed.row.SeedRow;
 
-@Slf4j
 @Data
 @Entity
 public class SeedStarter {
