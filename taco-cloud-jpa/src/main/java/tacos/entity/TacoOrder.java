@@ -23,8 +23,8 @@ public class TacoOrder {
 	private Long id;
 	
 	private String ccNumber;
-    private String ccExpiration;
-    private String ccCVV;
+  private String ccExpiration;
+  private String ccCVV;
 	private Date placedAt;
 	
 	@OneToMany(cascade=CascadeType.ALL)
