@@ -68,14 +68,10 @@ public class TacoCloudRestclientApplication {
    }
 
 	
-/*
- * Commented as Traverson requires HATEOAS rel attribute in json
- * 
- * 
 	 @Bean
 	  public Traverson traverson() {
 	    Traverson traverson = new Traverson(
-	        URI.create("http://localhost:8080/api/ingredients"), MediaTypes.HAL_JSON);
+	        URI.create("http://localhost:8080/data-api"), MediaTypes.HAL_JSON);
 	    return traverson;
 	  }
 
@@ -89,7 +85,7 @@ public class TacoCloudRestclientApplication {
 	      }
 	    };
 	  }
-	  
+	 
 	  @Bean
 	  public CommandLineRunner traversonRecentTacos(TacoCloudClient tacoCloudClient) {
 	    return args -> {
@@ -100,6 +96,5 @@ public class TacoCloudRestclientApplication {
 	      }
 	    };
 	  }
-*/
 	 
 }

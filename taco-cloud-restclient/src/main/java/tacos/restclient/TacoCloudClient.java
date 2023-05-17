@@ -19,18 +19,13 @@ import tacos.dto.TacoDto;
 public class TacoCloudClient {
 
   private RestTemplate rest;
-  
-  public TacoCloudClient(RestTemplate rest) {
-    this.rest = rest;
-  }
-  
-/*  private Traverson traverson;
+  private Traverson traverson;
 
   public TacoCloudClient(RestTemplate rest, Traverson traverson) {
     this.rest = rest;
     this.traverson = traverson;
   }
-*/
+
   //
   // GET examples
   //
@@ -151,9 +146,8 @@ public class TacoCloudClient {
 
   //
   // Traverson with RestTemplate examples  
-  // Commented as Traverson requires HATEOAS rel attribute in json
   //
-/*
+
   public Iterable<IngredientDto> getAllIngredientsWithTraverson() {
     ParameterizedTypeReference<CollectionModel<IngredientDto>> ingredientType =
         new ParameterizedTypeReference<CollectionModel<IngredientDto>>() {};
@@ -184,19 +178,19 @@ public class TacoCloudClient {
 
     CollectionModel<TacoDto> tacoRes =
         traverson
-          .follow("tacos")
-          .follow("recents")
+          .follow("tacoes")
+          //.follow("recents")
           .toObject(tacoType);
 
     Collection<TacoDto> tacos = tacoRes.getContent();
     // Alternatively, list the two paths in the same call to follow()
-    
+    /*
     CollectionModel<Taco> tacoRes =
        traverson
          .follow("tacos", "recents")
-         .toObject(tacoType);
+         .toObject(tacoType); */
     
     return tacos;
   }
-*/
+
 }
