@@ -24,7 +24,7 @@ import tacos.dto.IngredientDto;
 
 @RestController
 @RequestMapping(path="/api/ingredients", produces="application/json")
-@CrossOrigin(origins="http://localhost:8080")
+@CrossOrigin(origins="*")
 public class IngredientController {
 
   private IngredientService service;
