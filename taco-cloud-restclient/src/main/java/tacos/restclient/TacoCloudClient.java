@@ -178,8 +178,7 @@ public class TacoCloudClient {
 
     CollectionModel<TacoDto> tacoRes =
         traverson
-          .follow("tacoes")
-          //.follow("recents")
+          .follow("tacos")
           .toObject(tacoType);
 
     Collection<TacoDto> tacos = tacoRes.getContent();
