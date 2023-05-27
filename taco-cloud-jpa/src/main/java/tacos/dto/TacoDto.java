@@ -15,19 +15,19 @@ public class TacoDto implements Serializable{
 	 /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -5221062901714573449L;
 
-	  @NotNull
-	  @Size(min=5, message="Name must be at least 5 characters long")
-	  private String name;
+	@NotNull
+	@Size(min=5, message="Name must be at least 5 characters long")
+	private String name;
 	 
-	  private Date createdAt = new Date();
-	 
-	  @Size(min=1, message="You must choose at least 1 ingredient")
-	  private List<IngredientDto> ingredients = new ArrayList<>();
+	private Date createdAt = new Date();
+	
+	@Size(min=1, message="You must choose at least 1 ingredient")
+	private List<IngredientDto> ingredients = new ArrayList<>();
 	  
-	  public void addIngredient(IngredientDto ingredient) {
-	    this.ingredients.add(ingredient);
-	  }
+	public void addIngredient(IngredientDto ingredient) {
+	  this.ingredients.add(ingredient);
+	}
 	
 }
