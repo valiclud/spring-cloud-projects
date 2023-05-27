@@ -7,10 +7,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import tacos.dto.TacoOrderDto;
 import tacos.entity.Client;
 import tacos.entity.TacoOrder;
+import tacos.messaging.JmsOrderMessagingService;
 
+@Slf4j
 @Service
 public class OrderService {
 
@@ -55,10 +59,13 @@ public class OrderService {
   }
 	
 	private void setExistingClient(TacoOrder tacoOrder) {
-	  List<Client> clients = this.clientRepository.findByDeliveryName(tacoOrder.getClient().getDeliveryName());
-    if(isClientAlreadyInDatabase(tacoOrder, clients)) {
-      tacoOrder.setClient(clients.get(0));
-    }
+		List<Client> clients = this.clientRepository.findByDeliveryName(tacoOrder.getClient().getDeliveryName());
+		if (isClientAlreadyInDatabase(tacoOrder, clients)) {
+			tacoOrder.setClient(clients.get(0));
+		} else {
+			if ((tacoOrder.getClient() != null) && (tacoOrder.getClient().getId() != null))
+				tacoOrder.getClient().setId(null);
+		}
 	}
 	
 	private boolean isClientAlreadyInDatabase(TacoOrder tacoOrder, List<Client> clients) {

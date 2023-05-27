@@ -33,7 +33,7 @@ public class TacoOrder {
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="client_id")
-  private Client client;
+    private Client client;
 	
 	public void addTaco(Taco taco) {
 		this.tacos.add(taco);
