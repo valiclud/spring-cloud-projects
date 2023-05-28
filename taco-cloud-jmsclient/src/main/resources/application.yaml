@@ -14,8 +14,8 @@ spring:
   artemis:
     broker-url: tcp://127.0.0.1:61616
     #broker-url: 127.0.0.1:58920
-    user: valicek@atlas.cz
-    password: lukasa
+    user:
+    password:
     embedded:
       enabled: false
     
