@@ -3,6 +3,8 @@ server:
 
 ---
 spring:
+  profiles:
+    active: jms-listener #jms-template 
 #  config:
 #    activate:
 #      on-profile: jms-listener #jms-template, 

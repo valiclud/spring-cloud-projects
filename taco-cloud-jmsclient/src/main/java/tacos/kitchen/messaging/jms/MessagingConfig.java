@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import tacos.dto.TacoOrderDto;
 import tacos.kitchen.messaging.jms.listener.OrderListener;
 
-//@Profile({"jms-template", "jms-listener"})
+@Profile({"jms-template", "jms-listener"})
 @Configuration
 @EnableJms
 @Slf4j
