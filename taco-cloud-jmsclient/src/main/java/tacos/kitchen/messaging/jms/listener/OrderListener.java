@@ -10,7 +10,7 @@ import tacos.dto.TacoOrderDto;
 import tacos.kitchen.KitchenUI;
 
 @Slf4j
-//@Profile("jms-listener")
+@Profile("jms-listener")
 @Component
 public class OrderListener {
   
