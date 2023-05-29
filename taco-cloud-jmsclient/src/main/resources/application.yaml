@@ -5,17 +5,11 @@ server:
 spring:
   profiles:
     active: jms-listener #jms-template 
-#  config:
-#    activate:
-#      on-profile: jms-listener #jms-template, 
-# The values given here are actually the default values. But they are explicitly
-# set here as an example of setting the Artemis properties.
   jms:
     template:
       receive-timeout: 2
   artemis:
     broker-url: tcp://127.0.0.1:61616
-    #broker-url: 127.0.0.1:58920
     user:
     password:
     embedded:
@@ -23,7 +17,8 @@ spring:
     
 ---
 spring:
-#  profiles: kafka-listener
+  profiles:
+    active: kafka-listener
     
   kafka:
     bootstrap-servers:
@@ -31,7 +26,9 @@ spring:
     template:
       default-topic: tacocloud.orders.topic
     consumer:
+#      key-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       group-id: tacocloud_kitchen
       properties:
-        spring.json.trusted.packages: tacos
+#        spring.json.value.default.type: tacos.dto.TacoOrderDto
+        spring.json.trusted.packages: tacos.dto
