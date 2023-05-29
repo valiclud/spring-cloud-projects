@@ -11,7 +11,7 @@ import tacos.dto.TacoOrderDto;
 
 @Slf4j
 @Service
-@Primary
+//@Primary
 public class JmsOrderMessagingService implements OrderMessagingService {
 
 	private JmsTemplate jms;
