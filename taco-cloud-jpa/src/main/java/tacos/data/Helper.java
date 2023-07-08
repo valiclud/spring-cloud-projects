@@ -67,7 +67,7 @@ public class Helper {
 	public static TacoOrderDto toTacoOrderDto(TacoOrder tacoOrder) {
 		TacoOrderDto tacoOrderDto = new TacoOrderDto();
 		tacoOrderDto.setCcNumber(tacoOrder.getCcNumber());
-		tacoOrderDto.setCcCVV(tacoOrder.getCcCVV());
+		tacoOrderDto.setCcVV(tacoOrder.getCcVv());
 		tacoOrderDto.setCcExpiration(tacoOrder.getCcExpiration());
 		tacoOrderDto.setPlacedAt(tacoOrder.getPlacedAt());
 		tacoOrderDto.setClientDto(toClientDto(tacoOrder.getClient()));
@@ -85,7 +85,7 @@ public class Helper {
 	public static TacoOrder toTacoOrder(TacoOrderDto tacoOrderDto) {
 		TacoOrder taco = new TacoOrder();
 		taco.setCcNumber(tacoOrderDto.getCcNumber());
-		taco.setCcCVV(tacoOrderDto.getCcCVV());
+		taco.setCcVv(tacoOrderDto.getCcVV());
 		taco.setCcExpiration(tacoOrderDto.getCcExpiration());
 		taco.setPlacedAt(tacoOrderDto.getPlacedAt());
 		Client c = toClient(tacoOrderDto.getClientDto());

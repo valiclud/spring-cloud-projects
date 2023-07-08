@@ -24,7 +24,7 @@ public class TacoOrder {
 	
 	private String ccNumber;
     private String ccExpiration;
-    private String ccCVV;
+    private String ccVv;
 	private Date placedAt;
 	
 	@OneToMany(cascade=CascadeType.ALL)
