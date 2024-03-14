@@ -38,32 +38,6 @@ public class TacoOrderController {
 		this.messageService = messageService;
 	}
 
-	@GetMapping(params = "recent")
-	public List<TacoOrderDto> recentTacoOrders() {
-		List<TacoOrderDto> tacoOrders = orderService.findAll();
-		return tacoOrders;
-	}
-*/
-    @GetMapping(params = "recent", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> recentTacoOrders() {
-	List<TacoOrderDto> tacoOrders = orderService.findAll();
-	  /*
-	  	List<JSONObject> entities = new ArrayList<JSONObject>();
-	  	entities.addAll(tacoOrders);
-
-		Map<String, Object> map = new TreeMap<String, Object>();
-		map.put("total", 1234);
-		map.put("total_pages", 124);
-		map.put("per_page", 10);
-		map.put("page", 1);
-		map.put("data", tacoOrders);
-		HttpHeaders headers = new HttpHeaders();
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.writerWithDefaultPrettyPrinter().writeValueAsString();
-		*/
-
-		return new ResponseEntity<>(tacoOrders,HttpStatus.CREATED);
-}
 	@GetMapping(params = "clients")
     public List<TacoOrderDto> clientsTacoOrders() {
     List<TacoOrderDto> tacoOrders = orderService.findAll();
