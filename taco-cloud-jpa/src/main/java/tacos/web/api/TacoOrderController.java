@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +37,7 @@ public class TacoOrderController {
 		this.orderService = orderService;
 		this.messageService = messageService;
 	}
-/*
+
 	@GetMapping(params = "recent")
 	public List<TacoOrderDto> recentTacoOrders() {
 		List<TacoOrderDto> tacoOrders = orderService.findAll();
@@ -63,7 +65,7 @@ public class TacoOrderController {
 		return new ResponseEntity<>(tacoOrders,HttpStatus.CREATED);
 }
 	@GetMapping(params = "clients")
-  public List<TacoOrderDto> clientsTacoOrders() {
+    public List<TacoOrderDto> clientsTacoOrders() {
     List<TacoOrderDto> tacoOrders = orderService.findAll();
     return tacoOrders;
   }
@@ -84,9 +86,19 @@ public class TacoOrderController {
 	@PostMapping(consumes="application/json")
 	  @ResponseStatus(HttpStatus.CREATED)
 	  public TacoOrderDto postOrder(@RequestBody TacoOrderDto order) {
-		messageService.sendOrder(order);
+		//messageService.sendOrder(order);
 	    Optional<TacoOrderDto> savedTaco = orderService.save(order);
 	    return savedTaco.get();
 	  }
+	
+		@DeleteMapping("/{orderId}")
+		@ResponseStatus(HttpStatus.NO_CONTENT)
+		public void deleteOrder(@PathVariable("orderId") Long orderId) {
+			try {
+				orderService.deleteByOrderId(orderId);
+			} catch (EmptyResultDataAccessException ex) {
+				log.error(ex.toString());
+			}
+		}
 
 }

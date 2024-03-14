@@ -1,8 +1,8 @@
 spring:
-  datasource:
-    url: jdbc:mysql://localhost/tacocloud
-    username: root
-    password: lukasa
+#  datasource:
+#    url: jdbc:mysql://localhost/tacocloud
+#    username: root
+#    password: lukasa
 #    generate-unique-name: false
 #    name: tacocloud
   thymeleaf:
@@ -49,4 +49,4 @@ management:
        show-details: always
 server:
   shutdown: graceful
-#  port: 8088
+  port: 8089

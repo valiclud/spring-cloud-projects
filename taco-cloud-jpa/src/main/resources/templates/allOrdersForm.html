@@ -22,10 +22,6 @@
 			</tr>
 		</thead>
 		<tbody>
-		<!--  	<tr th:if="${orderPage.empty}">
-				<td colspan="8">No orders</td>
-			</tr>
-			-->
 			<tr th:each="tacoOrder: ${orderPage}">
 				<td th:text="${tacoOrder.clientDto.deliveryName}">Delivery name</td>
 				<td th:text="${tacoOrder.clientDto.deliveryStreet}">Delivery street</td>
