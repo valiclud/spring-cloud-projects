@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -43,36 +44,29 @@ public class TacoOrderController {
     List<TacoOrderDto> tacoOrders = orderService.findAll();
     return tacoOrders;
   }
-/*	
-	@PostMapping(consumes="application/json")
-	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<TacoOrderDto> postTaco(@RequestBody TacoOrderDto tacoOrder) {
-		Optional<TacoOrderDto> savedTaco = orderService.save(tacoOrder);
-		if (savedTaco.isEmpty()) {
-			log.info("Taco Order: " + tacoOrder + " was not saved in database");
-			return new ResponseEntity<>(null, HttpStatus.NOT_MODIFIED);
-		}
-		log.info("Taco Order: " + savedTaco + " was sucessfully saved in database");
-
-		return new ResponseEntity<TacoOrderDto>(HttpStatus.OK);
-	}
-*/	
-	@PostMapping(consumes="application/json")
-	  @ResponseStatus(HttpStatus.CREATED)
-	  public TacoOrderDto postOrder(@RequestBody TacoOrderDto order) {
-		//messageService.sendOrder(order);
-	    Optional<TacoOrderDto> savedTaco = orderService.save(order);
-	    return savedTaco.get();
-	  }
 	
-		@DeleteMapping("/{orderId}")
-		@ResponseStatus(HttpStatus.NO_CONTENT)
-		public void deleteOrder(@PathVariable("orderId") Long orderId) {
-			try {
-				orderService.deleteByOrderId(orderId);
-			} catch (EmptyResultDataAccessException ex) {
-				log.error(ex.toString());
-			}
+	@GetMapping(params = "recent")
+    public List<TacoOrderDto> recentTacoOrders() {
+    List<TacoOrderDto> tacoOrders = orderService.findAll();
+    return tacoOrders;
+  }
+
+	@PostMapping(consumes = "application/json")
+	@ResponseStatus(HttpStatus.CREATED)
+	public TacoOrderDto postOrder(@RequestBody TacoOrderDto order) {
+		// messageService.sendOrder(order);
+		Optional<TacoOrderDto> savedTaco = orderService.save(order);
+		return savedTaco.get();
+	}
+	
+	@DeleteMapping("/{orderId}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteOrder(@PathVariable("orderId") Long orderId) {
+		try {
+			orderService.deleteByOrderId(orderId);
+		} catch (EmptyResultDataAccessException ex) {
+			log.error(ex.toString());
 		}
+	}
 
 }
