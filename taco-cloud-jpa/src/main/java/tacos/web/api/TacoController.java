@@ -18,29 +18,24 @@ import tacos.dto.TacoDto;
 @Slf4j
 @RestController
 @RequestMapping(path = "/api/tacos", produces = "application/json")
-@CrossOrigin(origins = {"http://tacocloud:8080", "http://tacocloud.com"})
+@CrossOrigin(origins = { "http://tacocloud:8080", "http://tacocloud.com" })
 public class TacoController {
-	
+
 	private TacoService tacoService;
 
 	public TacoController(TacoService tacoService) {
 		this.tacoService = tacoService;
 	}
-	
+
 	@GetMapping(params = "recent")
 	public List<TacoDto> recentTacos() {
-		List<TacoDto> tacos = tacoService.findAll();
-		log.info("Called Rest Controller - Ordered tacos submitted:{}", tacos);
-		return tacos;
+		return tacoService.findAll();
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<TacoDto> tacoById(@PathVariable("id") Long id) {
-		Optional<TacoDto> optTaco = this.tacoService.findById(id);
-		if (optTaco.isPresent()) {
-			return new ResponseEntity<>(optTaco.get(), HttpStatus.OK);
-		}
-		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		TacoDto optTaco = this.tacoService.findById(id);
+		return new ResponseEntity<>(optTaco, HttpStatus.OK);
 	}
-	
+
 }

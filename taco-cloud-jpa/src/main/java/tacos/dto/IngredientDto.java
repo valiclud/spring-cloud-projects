@@ -2,9 +2,17 @@ package tacos.dto;
 
 import java.io.Serializable;
 
+import tacos.data.Type;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@EqualsAndHashCode
+@NoArgsConstructor
 public class IngredientDto implements Serializable{
 	
 	/**
@@ -15,7 +23,4 @@ public class IngredientDto implements Serializable{
 	private String code;
 	private String name;
 	private Type type;
-	public enum Type {
-	    WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
-	  }
 }

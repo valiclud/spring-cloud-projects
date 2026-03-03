@@ -12,10 +12,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @Entity
+@AllArgsConstructor
 public class TacoOrder {
 
 	@Id
@@ -24,7 +26,7 @@ public class TacoOrder {
 	
 	private String ccNumber;
     private String ccExpiration;
-    private String ccVv;
+    private String ccCvv;
 	private Date placedAt;
 	
 	@OneToMany(cascade=CascadeType.ALL)

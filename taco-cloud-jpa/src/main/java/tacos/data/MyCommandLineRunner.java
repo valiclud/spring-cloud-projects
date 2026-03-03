@@ -5,7 +5,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import tacos.entity.Ingredient;
-import tacos.entity.Ingredient.Type;
 
 @Component
 public class MyCommandLineRunner implements CommandLineRunner {

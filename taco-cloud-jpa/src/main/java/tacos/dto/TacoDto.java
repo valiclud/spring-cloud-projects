@@ -4,12 +4,20 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import tacos.entity.TacoOrder;
 
 @Data
+@AllArgsConstructor
+@EqualsAndHashCode
+@NoArgsConstructor
 public class TacoDto implements Serializable{
 
 	 /**
@@ -17,6 +25,8 @@ public class TacoDto implements Serializable{
 	 */
 	private static final long serialVersionUID = -5221062901714573449L;
 
+	private Long id;
+	
 	@NotNull
 	@Size(min=5, message="Name must be at least 5 characters long")
 	private String name;

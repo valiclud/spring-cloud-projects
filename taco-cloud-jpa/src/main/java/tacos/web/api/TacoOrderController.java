@@ -27,46 +27,38 @@ import tacos.messaging.OrderMessagingService;
 @Slf4j
 @RestController
 @RequestMapping(path = "/api/tacoorders", produces = "application/json")
-@CrossOrigin(origins = {"http://tacocloud:8080", "http://tacocloud.com"})
+@CrossOrigin(origins = { "http://tacocloud:8080", "http://tacocloud.com" })
 public class TacoOrderController {
 
 	private OrderService orderService;
 	private OrderMessagingService messageService;
 
-	public TacoOrderController(OrderService orderService,
-			OrderMessagingService messageService) {
+	public TacoOrderController(OrderService orderService, OrderMessagingService messageService) {
 		this.orderService = orderService;
 		this.messageService = messageService;
 	}
 
 	@GetMapping(params = "clients")
-    public List<TacoOrderDto> clientsTacoOrders() {
-    List<TacoOrderDto> tacoOrders = orderService.findAll();
-    return tacoOrders;
-  }
-	
+	public List<TacoOrderDto> clientsTacoOrders() {
+		return orderService.findAll();
+	}
+
 	@GetMapping(params = "recent")
-    public List<TacoOrderDto> recentTacoOrders() {
-    List<TacoOrderDto> tacoOrders = orderService.findAll();
-    return tacoOrders;
-  }
+	public List<TacoOrderDto> recentTacoOrders() {
+		return orderService.findAll();
+	}
 
 	@PostMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public TacoOrderDto postOrder(@RequestBody TacoOrderDto order) {
+	public void postOrder(@RequestBody TacoOrderDto order) {
 		// messageService.sendOrder(order);
-		Optional<TacoOrderDto> savedTaco = orderService.save(order);
-		return savedTaco.get();
+		orderService.save(order);
 	}
-	
+
 	@DeleteMapping("/{orderId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteOrder(@PathVariable("orderId") Long orderId) {
-		try {
-			orderService.deleteByOrderId(orderId);
-		} catch (EmptyResultDataAccessException ex) {
-			log.error(ex.toString());
-		}
+		orderService.deleteById(orderId);
 	}
 
 }

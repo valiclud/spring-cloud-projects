@@ -5,7 +5,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.1</version>
+		<!--<version>3.0.1</version> -->
+		<version>3.1.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>sia</groupId>
@@ -121,13 +122,16 @@
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/javax.jms/javax.jms-api -->
-<dependency>
-    <groupId>javax.jms</groupId>
-    <artifactId>javax.jms-api</artifactId>
-    <version>2.0.1</version>
-</dependency>
-
-		
+		<dependency>
+		    <groupId>javax.jms</groupId>
+		    <artifactId>javax.jms-api</artifactId>
+		    <version>2.0.1</version>
+		</dependency>
+		<dependency>
+			  <groupId>org.modelmapper</groupId>
+			  <artifactId>modelmapper</artifactId>
+			  <version>2.4.2</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

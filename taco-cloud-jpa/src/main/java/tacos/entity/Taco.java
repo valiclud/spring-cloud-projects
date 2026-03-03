@@ -12,11 +12,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 
 @Data
 @Entity
+@AllArgsConstructor
 @RestResource(rel="tacos", path="tacos")
 public class Taco {
  
