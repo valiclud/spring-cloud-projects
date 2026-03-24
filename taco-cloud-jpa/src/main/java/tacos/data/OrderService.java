@@ -41,10 +41,10 @@ public class OrderService {
 	}
 
 	public void save(TacoOrderDto tacoOrderDto) {
-		if (!this.orderRepository.existsById(tacoOrderDto.getId())) {
+		//if (!this.orderRepository.existsById(tacoOrderDto.getId())) {
 			this.orderRepository.save(dtoTacoOrderMapper.apply(tacoOrderDto));
-		}
-		throw new ResourceAccessException("Taco Order with id [%s] already exists ".formatted(tacoOrderDto.getId()));
+		//}
+		//throw new ResourceAccessException("Taco Order with id [%s] already exists ".formatted(tacoOrderDto.getId()));
 	}
 
 	public TacoOrderDto findById(Long id) {

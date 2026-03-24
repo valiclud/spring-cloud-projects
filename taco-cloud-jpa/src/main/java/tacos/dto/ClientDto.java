@@ -38,5 +38,4 @@ public class ClientDto implements Serializable {
 	@NotBlank(message = "ZIP code is required")
 	private String deliveryZip;
 
-	//private List<TacoOrderDto> tacoOrders;
 }

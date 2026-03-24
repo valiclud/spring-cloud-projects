@@ -36,8 +36,8 @@ public class TacoOrderDto implements Serializable{
 	@Digits(integer = 3, fraction = 0, message = "Invalid CVV")
 	private String ccCvv;
 	
-	//@NotNull
-	//@Valid
+	@NotNull
+	@Valid
 	private ClientDto clientDto;
 	
 	private List<TacoDto> tacos = new ArrayList<>();

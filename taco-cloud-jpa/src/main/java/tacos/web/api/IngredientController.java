@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +19,10 @@ import tacos.data.IngredientService;
 import tacos.dto.IngredientDto;
 
 @RestController
+//@CrossOrigin(origins = { "http://localhost:8089" })
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(path = "/api/ingredients", produces = "application/json")
-@CrossOrigin(origins = " * ")
+//@CrossOrigin(origins = { "http://tacocloud:8080", "http://tacocloud.com" })
 public class IngredientController {
 
 	private IngredientService service;
@@ -38,13 +41,13 @@ public class IngredientController {
 	 * @GetMapping public Map<String, List<IngredientDto>> allIngredients() { return
 	 * Collections.singletonMap("ingredients", service.findAll()); }
 	 */
-
+/*
 	@GetMapping("/{id}")
 	public ResponseEntity<IngredientDto> clientById(@PathVariable("id") Long id) {
 		IngredientDto optIngredient = this.service.findById(id);
 		return new ResponseEntity<>(optIngredient, HttpStatus.OK);
 	}
-
+*/
 	@PostMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> postIngredient(@RequestBody IngredientDto ingredientDto) {
@@ -52,4 +55,9 @@ public class IngredientController {
 		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 
+	@DeleteMapping("/{ingredientId}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteIngredient(@PathVariable("ingredientId") Long ingredientId) {
+		this.service.deleteById(ingredientId);
+	}
 }

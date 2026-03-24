@@ -16,5 +16,5 @@ public class RestTacoOrderResponse<T> {
     private int total;
     private int total_pages;
 
-    private T data;
+    private T result;
 }

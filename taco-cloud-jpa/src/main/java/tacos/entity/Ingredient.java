@@ -18,16 +18,11 @@ import lombok.AccessLevel;
 @NoArgsConstructor(access=AccessLevel.PRIVATE, force=true)
 public class Ingredient {
 
-	
 	  @Id
 	  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	  private Long id;
 	  private String code;
 	  private String name;  
 	  private Type type;
-	  /*
-	  private enum Type {
-		    WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
-		  }
-	  */
+
 }

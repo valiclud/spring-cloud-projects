@@ -20,7 +20,8 @@ public class DTOClientMapper implements Function<ClientDto, Client> {
 				client.getDeliveryCity(),
 				client.getDeliveryState(),
 				client.getDeliveryZip(),
-				client.getCreatedAt());
+				client.getCreatedAt(),
+				null);
 	}
 
 }

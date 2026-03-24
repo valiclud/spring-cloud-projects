@@ -14,30 +14,29 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @AllArgsConstructor
-@RestResource(rel="tacos", path="tacos")
+@NoArgsConstructor
+@RestResource(rel = "tacos", path = "tacos")
 public class Taco {
- 
- 
- 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
- 
-  private String name;
- 
-  private Date createdAt = new Date();
- 
-  @ManyToMany()
-  @JoinTable(name="Ingredient_Ref")
-  private List<Ingredient> ingredients = new ArrayList<>();
-  
-  public void addIngredient(Ingredient ingredient) {
-    this.ingredients.add(ingredient);
-  }
- 
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	private String name;
+
+	private Date createdAt = new Date();
+
+	@ManyToMany()
+	@JoinTable(name = "Ingredient_Ref")
+	private List<Ingredient> ingredients = new ArrayList<>();
+
+	public void addIngredient(Ingredient ingredient) {
+		this.ingredients.add(ingredient);
+	}
+
 }

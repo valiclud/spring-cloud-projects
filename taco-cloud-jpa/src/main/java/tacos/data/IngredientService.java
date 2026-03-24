@@ -47,4 +47,10 @@ public class IngredientService {
 		throw new ResourceAccessException("Ingredient with id [%s] already exists ".formatted(ingredientDto.getId()));
 	}
 
+	public void deleteById(long id) {
+		if (!this.ingredientRepository.existsById(id)) {
+			throw new ResourceNotFoundException("Ingredient with id [%s] not found ".formatted(id));
+		}
+		this.ingredientRepository.deleteById(id);
+	}
 }

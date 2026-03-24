@@ -11,10 +11,12 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "Client_Taco")
 public class Client {
 
@@ -29,7 +31,7 @@ public class Client {
   private String deliveryZip;
   private Date createdAt;
 
- // @OneToMany(mappedBy = "client")
- // private List<TacoOrder> tacoOrders;
+  @OneToMany(mappedBy = "client")
+  private List<TacoOrder> tacoOrders;
 
 }
