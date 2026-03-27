@@ -93,4 +93,32 @@ local.properties
 hs_err_pid*
 replay_pid*
 
+#VS
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+.vs
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.svg
+
 # End of https://www.toptal.com/developers/gitignore/api/eclipse,java
