@@ -70,6 +70,8 @@ public class IngredientService {
 			Class<?> type = field.getType();
 			if (type.isEnum()) {
 				ReflectionUtils.setField(field, existingIngredient.get(), Type.valueOf((String) value));
+			} else if (type.isAssignableFrom(Long.class)) {
+				ReflectionUtils.setField(field, existingIngredient.get(), ((Number)value).longValue());
 			} else {
 				ReflectionUtils.setField(field, existingIngredient.get(), value);
 			}

@@ -59,8 +59,8 @@ public class IngredientController {
 	
 	@PatchMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<?> updateIngredient(@PathVariable int id, @RequestBody Map<String, Object> fields) {
-		IngredientDto ingredientDto = this.service.updateIngredientByFields(Long.valueOf(id), fields);
+	public ResponseEntity<?> updateIngredient(@PathVariable Long id, @RequestBody Map<String, Object> fields) {
+		IngredientDto ingredientDto = this.service.updateIngredientByFields(id, fields);
 		return new ResponseEntity<>(ingredientDto, HttpStatus.OK);
 	}
 
