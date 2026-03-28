@@ -1,11 +1,15 @@
 package tacos.data;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.web.client.ResourceAccessException;
 
 import tacos.dto.IngredientDto;
@@ -20,7 +24,7 @@ public class IngredientService {
 	IngredientRepository ingredientRepository;
 
 	@Autowired
-	IngredientDTOMapper ingredientDTOMapper;
+	IngredientDTOMapper ingredientDTOMapper; 
 
 	@Autowired
 	DTOIngredientMapper dtoIngredientMapper;
@@ -40,9 +44,10 @@ public class IngredientService {
 		return this.ingredientRepository.findIngredientDtoByCode(code);
 	}
 
-	public void save(IngredientDto ingredientDto) {
+	public IngredientDto save(IngredientDto ingredientDto) {
 		if (!this.ingredientRepository.existsById(ingredientDto.getId())) {
-			this.ingredientRepository.save(dtoIngredientMapper.apply(ingredientDto));
+			Ingredient ingredient = this.ingredientRepository.save(dtoIngredientMapper.apply(ingredientDto));
+			return ingredientDTOMapper.apply(ingredient);
 		}
 		throw new ResourceAccessException("Ingredient with id [%s] already exists ".formatted(ingredientDto.getId()));
 	}
@@ -52,5 +57,23 @@ public class IngredientService {
 			throw new ResourceNotFoundException("Ingredient with id [%s] not found ".formatted(id));
 		}
 		this.ingredientRepository.deleteById(id);
+	}
+	
+	public IngredientDto updateIngredientByFields(Long id, Map<String, Object> fields) {
+		if (!this.ingredientRepository.existsById(id)) {
+			throw new ResourceNotFoundException("Ingredient with id [%s] not found ".formatted(id));
+		}
+		Optional<Ingredient> existingIngredient = this.ingredientRepository.findById(id);
+		fields.forEach((key, value) -> {
+			Field field = ReflectionUtils.findField(Ingredient.class, key);
+			field.setAccessible(Boolean.TRUE);
+			Class<?> type = field.getType();
+			if (type.isEnum()) {
+				ReflectionUtils.setField(field, existingIngredient.get(), Type.valueOf((String) value));
+			} else {
+				ReflectionUtils.setField(field, existingIngredient.get(), value);
+			}
+		});
+		return ingredientDTOMapper.apply(this.ingredientRepository.save(existingIngredient.get()));
 	}
 }
