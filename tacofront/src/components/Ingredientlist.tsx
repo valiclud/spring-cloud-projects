@@ -4,6 +4,7 @@ import { DataGrid, type GridColDef, type GridCellParams } from '@mui/x-data-grid
 import Snackbar from '@mui/material/Snackbar'
 import { getIngredients, deleteIngredient } from '../api/ingredientapi';
 import AddIngredient from '../components/AddIngredient';
+import EditIngredient from '../components/EditIngredient';
 
 function Ingredientlist() {
     const [open, setOpen] = useState(false);
@@ -30,6 +31,16 @@ function Ingredientlist() {
         { field: 'code', headerName: 'Code', width: 200 },
         { field: 'name', headerName: 'Name', width: 200 },
         { field: 'type', headerName: 'Type', width: 200 },
+        {
+            field: 'edit',
+            headerName: '',
+            width: 90,
+            sortable: false,
+            filterable: false,
+            disableColumnMenu: true,
+            renderCell: (params: GridCellParams) =>
+                <EditIngredient ingredientdata={params.row} />
+        },
         {
             field: 'delete', headerName: '', width: 90,
             sortable: false,

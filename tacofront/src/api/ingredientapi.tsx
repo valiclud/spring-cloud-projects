@@ -19,3 +19,13 @@ export const addIngredient = async (ingredient: Ingredient): Promise<Ingredient>
   });
   return response.data;
 }
+
+export const updateIngredient = async (ingredient: Ingredient):
+    Promise<Ingredient> => {
+    const response = await axios.patch(`${import.meta.env.VITE_API_URL}/api/ingredients/${ingredient.id}`, ingredient, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+    return response.data;
+}

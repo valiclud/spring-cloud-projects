@@ -6,7 +6,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import type { Ingredient } from '../types/ingredienttypes';
 import { addIngredient } from '../api/ingredientapi';
-import qIngredientDialogContent  from './IngredientDialogContent';
+import IngredientDialogContent  from './IngredientDialogContent';
 function AddIngredient() {
     const [open, setOpen] = useState(false);
     const [ingredient, setIngredient] = useState<Ingredient>({
