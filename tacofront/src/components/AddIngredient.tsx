@@ -3,6 +3,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import type { Ingredient } from '../types/ingredienttypes';
 import { addIngredient } from '../api/ingredientapi';
@@ -43,13 +44,13 @@ function AddIngredient() {
     }
     return (
         <>
-            <button onClick={handleClickOpen}>New Ingredient</button>
+            <Button onClick={handleClickOpen}>New Ingredient</Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>New ingredient</DialogTitle>
                 <IngredientDialogContent ingredient={ingredient} handleChange={handleChange}/>
                 <DialogActions>
-                    <button onClick={handleClose}>Cancel</button>
-                    <button onClick={handleSave}>Save</button>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={handleSave}>Save</Button>
                 </DialogActions>
             </Dialog>
         </>
